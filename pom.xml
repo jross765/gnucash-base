@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>org.gnucash</groupId>
 		<artifactId>gnucash</artifactId>
-		<version>1.7.0</version>
+		<version>1.8</version>
 	</parent>
 
 	<artifactId>gnucash-base</artifactId>
-
 	<name>${project.title} : Base</name>
+	<version>1.7.0</version>
 
 	<properties>
 
