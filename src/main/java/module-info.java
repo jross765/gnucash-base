@@ -1,4 +1,5 @@
 module gnucash.base {
+
 	requires static org.slf4j;
 	requires java.desktop;
 	
@@ -9,4 +10,5 @@ module gnucash.base {
 	exports org.gnucash.base.basetypes.simple.spec;
 	exports org.gnucash.base.basetypes.complex;
 	exports org.gnucash.base.tuples;
+
 }
