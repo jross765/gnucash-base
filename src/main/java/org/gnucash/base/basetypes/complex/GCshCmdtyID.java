@@ -28,23 +28,17 @@ public class GCshCmdtyID extends GCshCmdtyCurrID {
 	}
 
 	public GCshCmdtyID(String nameSpaceFree, String code) {
-
 		super(nameSpaceFree, code);
-
-//	if ( getType() != Type.SECURITY_GENERAL )
-//	    throw new InvalidCmdtyCurrTypeException();
-
-		setType(Type.SECURITY_GENERAL);
+		
+		if ( getType() != Type.SECURITY_GENERAL )
+			throw new InvalidCmdtyCurrTypeException();
 	}
 
 	public GCshCmdtyID(GCshCmdtyCurrID cmdtyCurrID) {
-
 		super(cmdtyCurrID.getNameSpace(), cmdtyCurrID.getCode());
 
-		if ( getType() == Type.CURRENCY )
+		if ( getType() != Type.SECURITY_GENERAL )
 			throw new InvalidCmdtyCurrTypeException();
-
-		setType(Type.SECURITY_GENERAL);
 	}
 
 	// ---------------------------------------------------------------

@@ -1,5 +1,7 @@
 package org.gnucash.base.basetypes.complex;
 
+import java.util.Currency;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,31 +50,30 @@ public class GCshCmdtyCurrID {
     // ---------------------------------------------------------------
     
     public GCshCmdtyCurrID() {
-	this.type = Type.UNSET;
+    	this.type = Type.UNSET;
     }
 
     public GCshCmdtyCurrID(String nameSpaceFree, String code) {
-	
-	if ( nameSpaceFree == null )
-	    throw new IllegalArgumentException("Name space is null");
+    	if ( nameSpaceFree == null )
+    		throw new IllegalArgumentException("Name space is null");
 
-	if ( nameSpaceFree.trim().equals("") )
-	    throw new IllegalArgumentException("Name space is empty");
+    	if ( nameSpaceFree.trim().equals("") )
+    		throw new IllegalArgumentException("Name space is empty");
 
-	if ( code == null )
-	    throw new IllegalArgumentException("Security code is null");
+    	if ( code == null )
+    		throw new IllegalArgumentException("Security code is null");
 
-	if ( code.trim().equals("") )
-	    throw new IllegalArgumentException("Security code is empty");
+    	if ( code.trim().equals("") )
+    		throw new IllegalArgumentException("Security code is empty");
 
-	if ( nameSpaceFree.trim().equals(GCshCmdtyCurrNameSpace.CURRENCY) ) {
-	    this.type = Type.CURRENCY;
-	} else {
-	    this.type = Type.SECURITY_GENERAL;
-	}
+    	if ( nameSpaceFree.trim().equals(GCshCmdtyCurrNameSpace.CURRENCY) ) {
+    		this.type = Type.CURRENCY;
+    	} else {
+    		this.type = Type.SECURITY_GENERAL;
+    	}
 
-	setNameSpace(nameSpaceFree.trim());
-	setCode(code.trim());
+    	setNameSpace(nameSpaceFree.trim());
+    	setCode(code.trim());
     }
 
 //    public CmdtyCurrID(String nameSpaceFree, String code) {
@@ -97,6 +98,39 @@ public class GCshCmdtyCurrID {
 //	    this.exchange = CmdtyCurrNameSpace.Exchange.UNSET;
 //	}
 //    }
+
+    public GCshCmdtyCurrID(GCshCmdtyID cmdtyID) {
+    	if ( cmdtyID == null )
+    		throw new IllegalArgumentException("argument <cmdtyID> is null");
+
+    	if ( ! cmdtyID.isSet() )
+    		throw new IllegalArgumentException("argument <cmdtyID> is not set");
+
+    	setNameSpace(cmdtyID.getNameSpace());
+    	setCode(cmdtyID.getCode());
+    }
+
+    public GCshCmdtyCurrID(GCshCurrID currID) {
+    	if ( currID == null )
+    		throw new IllegalArgumentException("argument <currID> is null");
+
+    	if ( ! currID.isSet() )
+    		throw new IllegalArgumentException("argument <currID> is not set");
+
+    	setNameSpace(currID.getNameSpace());
+    	setCode(currID.getCode());
+    }
+
+    public GCshCmdtyCurrID(Currency curr) {
+    	if ( curr == null )
+    		throw new IllegalArgumentException("argument <curr> is null");
+
+    	if ( curr.getSymbol().equals("") )
+    		throw new IllegalArgumentException("argument <curr> is empty");
+
+    	setNameSpace(GCshCmdtyCurrNameSpace.CURRENCY);
+    	setCode(curr.getSymbol());
+    }
 
     // ---------------------------------------------------------------
     
@@ -230,7 +264,6 @@ public class GCshCmdtyCurrID {
     }
 
     public String toStringShort() {
-	
 	String result = nameSpace + SEPARATOR + code;
 
 	return result;
