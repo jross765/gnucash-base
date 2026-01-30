@@ -22,7 +22,8 @@ public class TestGCshCmdtyID_MIC {
 	public void test02() throws Exception {
 		GCshCmdtyID_MIC cmdty = new GCshCmdtyID_MIC(GCshCmdtyCurrNameSpace.MIC.XFRA, "MBG");
 
-		assertEquals(GCshCmdtyCurrID.Type.SECURITY_MIC, cmdty.getType());
+		assertEquals(GCshCmdtyCurrID.Type.SECURITY, cmdty.getType());
+		assertEquals(GCshCmdtyID.SubType.MIC, cmdty.getSubType());
 		assertEquals(GCshCmdtyCurrNameSpace.MIC.XFRA, cmdty.getMIC());
 		assertEquals("MBG", cmdty.getCode());
 		assertEquals("XFRA:MBG", cmdty.toString());
@@ -52,7 +53,8 @@ public class TestGCshCmdtyID_MIC {
 		GCshCmdtyID_MIC cmdtyPrs = GCshCmdtyID_MIC.parse("XFRA:SAP");
 		GCshCmdtyID_MIC cmdtyRef = new GCshCmdtyID_MIC(GCshCmdtyCurrNameSpace.MIC.XFRA, "SAP");
 
-		assertEquals(GCshCmdtyCurrID.Type.SECURITY_MIC, cmdtyPrs.getType());
+		assertEquals(GCshCmdtyCurrID.Type.SECURITY, cmdtyPrs.getType());
+		assertEquals(GCshCmdtyID.SubType.MIC, cmdtyPrs.getSubType());
 		assertEquals("XFRA:SAP", cmdtyPrs.toString());
 		assertEquals(cmdtyRef.toString(), cmdtyPrs.toString());
 		assertEquals(cmdtyRef.toStringLong(), cmdtyPrs.toStringLong());

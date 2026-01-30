@@ -19,24 +19,26 @@ public class GCshCmdtyID_MIC extends GCshCmdtyID {
 
 	public GCshCmdtyID_MIC() {
 		super();
-		type = Type.SECURITY_MIC;
-		mic = GCshCmdtyCurrNameSpace.MIC.UNSET;
+		
+		// setType(Type.SECURITY);
+		setSubType(SubType.MIC);
+		setMIC(GCshCmdtyCurrNameSpace.MIC.UNSET);
 	}
 
 	public GCshCmdtyID_MIC(GCshCmdtyCurrNameSpace.MIC mic, String secCode) {
-
 		super(mic.toString(), secCode);
 
-		setType(Type.SECURITY_MIC);
+		// setType(Type.SECURITY);
+		setSubType(SubType.MIC);
 		setMIC(mic);
 	}
 
-	public GCshCmdtyID_MIC(String nameSpace, String code) {
+	public GCshCmdtyID_MIC(String micStr, String code) {
+		super(micStr, code);
 
-		super(nameSpace, code);
-
-		setType(Type.SECURITY_MIC);
-		setMIC(nameSpace);
+		// setType(Type.SECURITY);
+		setSubType(SubType.MIC);
+		setMIC(micStr);
 	}
 
 	// ---------------------------------------------------------------
@@ -52,15 +54,21 @@ public class GCshCmdtyID_MIC extends GCshCmdtyID {
 	// ----------------------------
 
 	public GCshCmdtyCurrNameSpace.MIC getMIC() {
-		if ( type != Type.SECURITY_MIC )
+		if ( type != Type.SECURITY )
 			throw new InvalidCmdtyCurrTypeException();
+
+		if ( subType != SubType.MIC )
+			throw new InvalidCmdtyCurrSubTypeException();
 
 		return mic;
 	}
 
 	public void setMIC(GCshCmdtyCurrNameSpace.MIC mic) {
-		if ( type != Type.SECURITY_MIC )
+		if ( type != Type.SECURITY )
 			throw new InvalidCmdtyCurrTypeException();
+
+		if ( subType != SubType.MIC )
+			throw new InvalidCmdtyCurrSubTypeException();
 
 		this.mic = mic;
 	}
@@ -98,7 +106,8 @@ public class GCshCmdtyID_MIC extends GCshCmdtyID {
 		if ( nameSpaceLoc.equals(GCshCmdtyCurrNameSpace.CURRENCY) ) {
 			throw new InvalidCmdtyCurrTypeException();
 		} else {
-			result.setType(Type.SECURITY_MIC);
+			result.setType(Type.SECURITY);
+			result.setSubType(SubType.MIC);
 			result.setNameSpace(nameSpaceLoc);
 			result.setMIC(nameSpaceLoc);
 			result.setCode(currSecCodeLoc);
@@ -155,7 +164,10 @@ public class GCshCmdtyID_MIC extends GCshCmdtyID {
 
 	@Override
 	public String toStringShort() {
-		if ( type != Type.SECURITY_MIC )
+		if ( type != Type.SECURITY )
+			return "ERROR";
+
+		if ( subType != SubType.MIC )
 			return "ERROR";
 
 		String result = mic.toString() + SEPARATOR + code;
@@ -165,7 +177,10 @@ public class GCshCmdtyID_MIC extends GCshCmdtyID {
 
 	@Override
 	public String toStringLong() {
-		if ( type != Type.SECURITY_MIC )
+		if ( type != Type.SECURITY )
+			return "ERROR";
+
+		if ( subType != SubType.MIC )
 			return "ERROR";
 
 		String result = "GCshCmdtyID_MIC [";

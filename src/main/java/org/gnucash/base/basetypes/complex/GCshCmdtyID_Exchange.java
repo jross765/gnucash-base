@@ -19,24 +19,25 @@ public class GCshCmdtyID_Exchange extends GCshCmdtyID {
 
 	public GCshCmdtyID_Exchange() {
 		super();
-		type = Type.SECURITY_EXCHANGE;
-		exchange = GCshCmdtyCurrNameSpace.Exchange.UNSET;
+		// setType(Type.SECURITY);
+		setSubType(SubType.EXCHANGE);
+		setExchange(GCshCmdtyCurrNameSpace.Exchange.UNSET);
 	}
 
 	public GCshCmdtyID_Exchange(GCshCmdtyCurrNameSpace.Exchange exchange, String secCode) {
-
 		super(exchange.toString(), secCode);
 
-		setType(Type.SECURITY_EXCHANGE);
+		// setType(Type.SECURITY);
+		setSubType(SubType.EXCHANGE);
 		setExchange(exchange);
 	}
 
-	public GCshCmdtyID_Exchange(String nameSpace, String code) {
+	public GCshCmdtyID_Exchange(String exchangeStr, String code) {
+		super(exchangeStr, code);
 
-		super(nameSpace, code);
-
-		setType(Type.SECURITY_EXCHANGE);
-		setExchange(nameSpace);
+		// setType(Type.SECURITY);
+		setSubType(SubType.EXCHANGE);
+		setExchange(exchangeStr);
 	}
 
 	// ---------------------------------------------------------------
@@ -52,15 +53,21 @@ public class GCshCmdtyID_Exchange extends GCshCmdtyID {
 	// ----------------------------
 
 	public GCshCmdtyCurrNameSpace.Exchange getExchange() {
-		if ( type != Type.SECURITY_EXCHANGE )
+		if ( type != Type.SECURITY )
 			throw new InvalidCmdtyCurrTypeException();
+
+		if ( subType != SubType.EXCHANGE )
+			throw new InvalidCmdtyCurrSubTypeException();
 
 		return exchange;
 	}
 
 	public void setExchange(GCshCmdtyCurrNameSpace.Exchange exchange) {
-		if ( type != Type.SECURITY_EXCHANGE )
+		if ( type != Type.SECURITY )
 			throw new InvalidCmdtyCurrTypeException();
+
+		if ( subType != SubType.EXCHANGE )
+			throw new InvalidCmdtyCurrSubTypeException();
 
 		this.exchange = exchange;
 	}
@@ -98,7 +105,8 @@ public class GCshCmdtyID_Exchange extends GCshCmdtyID {
 		if ( nameSpaceLoc.equals(GCshCmdtyCurrNameSpace.CURRENCY) ) {
 			throw new InvalidCmdtyCurrTypeException();
 		} else {
-			result.setType(Type.SECURITY_EXCHANGE);
+			result.setType(Type.SECURITY);
+			result.setSubType(SubType.EXCHANGE);
 			result.setNameSpace(nameSpaceLoc);
 			result.setExchange(nameSpaceLoc);
 			result.setCode(currSecCodeLoc);
@@ -155,7 +163,10 @@ public class GCshCmdtyID_Exchange extends GCshCmdtyID {
 
 	@Override
 	public String toStringShort() {
-		if ( type != Type.SECURITY_EXCHANGE )
+		if ( type != Type.SECURITY )
+			return "ERROR";
+
+		if ( subType != SubType.EXCHANGE )
 			return "ERROR";
 
 		String result = exchange.toString() + SEPARATOR + code;
@@ -165,7 +176,10 @@ public class GCshCmdtyID_Exchange extends GCshCmdtyID {
 
 	@Override
 	public String toStringLong() {
-		if ( type != Type.SECURITY_EXCHANGE )
+		if ( type != Type.SECURITY )
+			return "ERROR";
+
+		if ( subType != SubType.EXCHANGE )
 			return "ERROR";
 
 		String result = "GCshCmdtyID_Exchange [";

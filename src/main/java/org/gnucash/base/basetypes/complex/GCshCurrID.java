@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
  */
 public class GCshCurrID extends GCshCmdtyCurrID {
 
+	@SuppressWarnings("unused")
 	private static final Logger LOGGER = LoggerFactory.getLogger(GCshCurrID.class);
 
 	// ---------------------------------------------------------------
@@ -20,11 +21,11 @@ public class GCshCurrID extends GCshCmdtyCurrID {
 
 	public GCshCurrID() {
 		super();
-		type = Type.CURRENCY;
+		
+		setType(Type.CURRENCY);
 	}
 
 	public GCshCurrID(Currency curr) {
-
 		super(GCshCmdtyCurrNameSpace.CURRENCY, curr.getCurrencyCode());
 
 		setType(Type.CURRENCY);
@@ -32,7 +33,6 @@ public class GCshCurrID extends GCshCmdtyCurrID {
 	}
 
 	public GCshCurrID(String currStr) {
-
 		super(GCshCmdtyCurrNameSpace.CURRENCY, currStr);
 
 		setType(Type.CURRENCY);
@@ -40,7 +40,6 @@ public class GCshCurrID extends GCshCmdtyCurrID {
 	}
 
 	public GCshCurrID(String nameSpaceFree, String code) {
-
 		super(nameSpaceFree, code);
 
 		if ( getType() != Type.CURRENCY )
@@ -63,13 +62,13 @@ public class GCshCurrID extends GCshCmdtyCurrID {
 
 	// ---------------------------------------------------------------
 
-	@Override
-	public void setType(Type type) {
+//	@Override
+//	public void setType(Type type) {
 //        if ( type != Type.CURRENCY )
 //            throw new InvalidCmdtyCurrIDException();
-
-		super.setType(type);
-	}
+//
+//		super.setType(type);
+//	}
 
 	// ----------------------------
 
@@ -80,19 +79,23 @@ public class GCshCurrID extends GCshCmdtyCurrID {
 		return currency;
 	}
 
-	public void setCurrency(Currency currency) {
+	public void setCurrency(Currency curr) {
 		if ( type != Type.CURRENCY )
 			throw new InvalidCmdtyCurrTypeException();
 
-		if ( currency == null )
-			throw new IllegalArgumentException("Argument currency is null");
+		if ( curr == null )
+			throw new IllegalArgumentException("argument <curr> is null");
 
-		this.currency = currency;
+		this.currency = curr;
+		setCode(curr.getCurrencyCode());
 	}
 
 	public void setCurrency(String iso4217CurrCode) {
 		if ( iso4217CurrCode == null )
-			throw new IllegalArgumentException("Argument string is null");
+			throw new IllegalArgumentException("argument <iso4217CurrCode> is null");
+
+		if ( iso4217CurrCode.trim().equals("") )
+			throw new IllegalArgumentException("argument <iso4217CurrCode> is empty");
 
 		setCurrency(Currency.getInstance(iso4217CurrCode));
 	}
@@ -120,8 +123,8 @@ public class GCshCurrID extends GCshCmdtyCurrID {
 		if ( nameSpaceLoc.equals(GCshCmdtyCurrNameSpace.CURRENCY) ) {
 			result.setType(Type.CURRENCY);
 			result.setNameSpace(nameSpaceLoc);
-			result.setCode(currSecCodeLoc);
 			result.setCurrency(Currency.getInstance(currSecCodeLoc));
+			// result.setCode(currSecCodeLoc);
 		} else {
 			throw new InvalidCmdtyCurrIDException();
 		}
@@ -184,7 +187,6 @@ public class GCshCurrID extends GCshCmdtyCurrID {
 		String result = "GCshCurrID [";
 
 		result += "nameSpace='" + getNameSpace() + "'";
-		result += ", secCode='" + getCode() + "'";
 
 		try {
 			result += ", currency='" + getCurrency().getCurrencyCode() + "'";

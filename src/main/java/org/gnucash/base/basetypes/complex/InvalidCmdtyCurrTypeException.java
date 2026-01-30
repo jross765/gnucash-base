@@ -7,11 +7,11 @@ public class InvalidCmdtyCurrTypeException extends RuntimeException {
     // ---------------------------------------------------------------
     
     public InvalidCmdtyCurrTypeException() {
-	super();
+    	super();
     }
 
     public InvalidCmdtyCurrTypeException(String msg) {
-	super(msg);
+    	super(msg);
     }
 
 }

@@ -28,16 +28,14 @@ public class GCshCmdtyCurrID {
     // We do not use the GnuCash-internally used "NONCURRENCY"
     public enum Type {
     	CURRENCY,
-    	SECURITY_EXCHANGE,  // name space is semi-formal abbrev. of major world exchange
-    	SECURITY_MIC,       // name space is formal abbrev. of major world exchange (ISO 10383)
-    	SECURITY_SECIDTYPE, // name space is widely-used security ID type/scheme (ISIN, CUSIP, SEDOL, WKN, ...)
-    	SECURITY_GENERAL,   // name space can be freely chosen
+    	SECURITY,
     	UNSET
     }
     
     // ---------------------------------------------------------------
     
-    private static final Logger LOGGER = LoggerFactory.getLogger(GCshCmdtyCurrID.class);
+    @SuppressWarnings("unused")
+	private static final Logger LOGGER = LoggerFactory.getLogger(GCshCmdtyCurrID.class);
 
     public static final char SEPARATOR = ':';
 
@@ -69,7 +67,7 @@ public class GCshCmdtyCurrID {
     	if ( nameSpaceFree.trim().equals(GCshCmdtyCurrNameSpace.CURRENCY) ) {
     		this.type = Type.CURRENCY;
     	} else {
-    		this.type = Type.SECURITY_GENERAL;
+    		this.type = Type.SECURITY;
     	}
 
     	setNameSpace(nameSpaceFree.trim());
@@ -129,7 +127,7 @@ public class GCshCmdtyCurrID {
     		throw new IllegalArgumentException("argument <curr> is empty");
 
     	setNameSpace(GCshCmdtyCurrNameSpace.CURRENCY);
-    	setCode(curr.getSymbol());
+    	setCode(curr.getCurrencyCode());
     }
 
     // ---------------------------------------------------------------
@@ -212,7 +210,7 @@ public class GCshCmdtyCurrID {
 	    result.setNameSpace(GCshCmdtyCurrNameSpace.CURRENCY);
 	    result.setCode(currSecCodeLoc);
 	} else {
-	    result.setType(Type.SECURITY_GENERAL);
+	    result.setType(Type.SECURITY);
 	    result.setNameSpace(nameSpaceLoc);
 	    result.setCode(currSecCodeLoc);
 	}
@@ -270,10 +268,11 @@ public class GCshCmdtyCurrID {
     }
 
     public String toStringLong() {
-	String result = "GCshCmdtyCurrID [type=" + getType();
+	String result = "GCshCmdtyCurrID [";
 	
-	result += ", nameSpace='" + getNameSpace() + "'";
-	result += ", code='" + getCode() + "'";
+	result += "type='"      + getType() + "', ";
+	result += "nameSpace='" + getNameSpace() + "', ";
+	result += "code='"      + getCode() + "'";
 	
 	result += "]";
 	

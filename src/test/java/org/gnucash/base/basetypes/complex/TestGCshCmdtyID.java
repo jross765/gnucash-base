@@ -33,7 +33,8 @@ public class TestGCshCmdtyID {
 	public void test02() throws Exception {
 		GCshCmdtyID commCurr = new GCshCmdtyID("EURONEXT", "MBG");
 
-		assertEquals(GCshCmdtyCurrID.Type.SECURITY_GENERAL, commCurr.getType());
+		assertEquals(GCshCmdtyCurrID.Type.SECURITY, commCurr.getType());
+		assertEquals(GCshCmdtyID.SubType.GENERAL, commCurr.getSubType());
 		assertEquals("EURONEXT", commCurr.getNameSpace());
 		assertEquals("MBG", commCurr.getCode());
 		assertEquals("EURONEXT:MBG", commCurr.toString());
@@ -90,7 +91,8 @@ public class TestGCshCmdtyID {
 		GCshCmdtyID commCurrPrs = GCshCmdtyID.parse("XFRA:SAP");
 		GCshCmdtyID commCurrRef = new GCshCmdtyID("XFRA", "SAP");
 
-		assertEquals(GCshCmdtyCurrID.Type.SECURITY_GENERAL, commCurrPrs.getType());
+		assertEquals(GCshCmdtyCurrID.Type.SECURITY, commCurrPrs.getType());
+		assertEquals(GCshCmdtyID.SubType.GENERAL, commCurrPrs.getSubType());
 		assertEquals("XFRA:SAP", commCurrPrs.toString());
 		assertEquals(commCurrRef.toString(), commCurrPrs.toString());
 		assertEquals(commCurrRef.toStringLong(), commCurrPrs.toStringLong());
@@ -109,11 +111,13 @@ public class TestGCshCmdtyID {
 	public void test04_3() throws Exception {
 		GCshCmdtyID commCurrPrs = GCshCmdtyID.parse("FUXNSTUELL:BURP"); // Wrong, but not check on this level
 		GCshCmdtyID commCurrRef = new GCshCmdtyID();
-		commCurrRef.setType(GCshCmdtyCurrID.Type.SECURITY_GENERAL);
+		commCurrRef.setType(GCshCmdtyCurrID.Type.SECURITY);
+		commCurrRef.setSubType(GCshCmdtyID.SubType.GENERAL);
 		commCurrRef.setNameSpace("FUXNSTUELL");
 		commCurrRef.setCode("BURP");
 
-		assertEquals(GCshCmdtyCurrID.Type.SECURITY_GENERAL, commCurrPrs.getType());
+		assertEquals(GCshCmdtyCurrID.Type.SECURITY, commCurrPrs.getType());
+		assertEquals(GCshCmdtyID.SubType.GENERAL, commCurrPrs.getSubType());
 		assertEquals("FUXNSTUELL:BURP", commCurrPrs.toString());
 		assertEquals(commCurrRef, commCurrPrs);
 

@@ -22,7 +22,8 @@ public class TestGCshCmdtyID_SecIdType {
 	public void test02() throws Exception {
 		GCshCmdtyID_SecIdType cmdty = new GCshCmdtyID_SecIdType(GCshCmdtyCurrNameSpace.SecIdType.ISIN, "DE0007100000");
 
-		assertEquals(GCshCmdtyCurrID.Type.SECURITY_SECIDTYPE, cmdty.getType());
+		assertEquals(GCshCmdtyCurrID.Type.SECURITY, cmdty.getType());
+		assertEquals(GCshCmdtyID.SubType.SECIDTYPE, cmdty.getSubType());
 		assertEquals(GCshCmdtyCurrNameSpace.SecIdType.ISIN, cmdty.getSecIdType());
 		assertEquals("DE0007100000", cmdty.getCode());
 		assertEquals("ISIN:DE0007100000", cmdty.toString());
@@ -53,7 +54,8 @@ public class TestGCshCmdtyID_SecIdType {
 		GCshCmdtyID_SecIdType cmdtyRef = new GCshCmdtyID_SecIdType(GCshCmdtyCurrNameSpace.SecIdType.ISIN,
 				"DE0007164600");
 
-		assertEquals(GCshCmdtyCurrID.Type.SECURITY_SECIDTYPE, cmdtyPrs.getType());
+		assertEquals(GCshCmdtyCurrID.Type.SECURITY, cmdtyPrs.getType());
+		assertEquals(GCshCmdtyID.SubType.SECIDTYPE, cmdtyPrs.getSubType());
 		assertEquals("ISIN:DE0007164600", cmdtyPrs.toString());
 		assertEquals(cmdtyRef.toString(), cmdtyPrs.toString());
 		assertEquals(cmdtyRef.toStringLong(), cmdtyPrs.toStringLong());

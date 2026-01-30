@@ -19,24 +19,26 @@ public class GCshCmdtyID_SecIdType extends GCshCmdtyID {
 
 	public GCshCmdtyID_SecIdType() {
 		super();
-		type = Type.SECURITY_SECIDTYPE;
-		secIdType = GCshCmdtyCurrNameSpace.SecIdType.UNSET;
+		
+		// setType(Type.SECURITY);
+		setSubType(SubType.SECIDTYPE);
+		setSecIdType(GCshCmdtyCurrNameSpace.SecIdType.UNSET);
 	}
 
 	public GCshCmdtyID_SecIdType(GCshCmdtyCurrNameSpace.SecIdType secIdType, String secCode) {
-
 		super(secIdType.toString(), secCode);
 
-		setType(Type.SECURITY_SECIDTYPE);
+		// setType(Type.SECURITY);
+		setSubType(SubType.SECIDTYPE);
 		setSecIdType(secIdType);
 	}
 
-	public GCshCmdtyID_SecIdType(String nameSpace, String code) {
+	public GCshCmdtyID_SecIdType(String secIDTypeStr, String code) {
+		super(secIDTypeStr, code);
 
-		super(nameSpace, code);
-
-		setType(Type.SECURITY_SECIDTYPE);
-		setSecIdType(nameSpace);
+		// setType(Type.SECURITY);
+		setSubType(SubType.SECIDTYPE);
+		setSecIdType(secIDTypeStr);
 	}
 
 	// ---------------------------------------------------------------
@@ -52,15 +54,21 @@ public class GCshCmdtyID_SecIdType extends GCshCmdtyID {
 	// ----------------------------
 
 	public GCshCmdtyCurrNameSpace.SecIdType getSecIdType() {
-		if ( type != Type.SECURITY_SECIDTYPE )
+		if ( type != Type.SECURITY )
 			throw new InvalidCmdtyCurrTypeException();
+
+		if ( subType != SubType.SECIDTYPE )
+			throw new InvalidCmdtyCurrSubTypeException();
 
 		return secIdType;
 	}
 
 	public void setSecIdType(GCshCmdtyCurrNameSpace.SecIdType secIdType) {
-		if ( type != Type.SECURITY_SECIDTYPE )
+		if ( type != Type.SECURITY )
 			throw new InvalidCmdtyCurrTypeException();
+
+		if ( subType != SubType.SECIDTYPE )
+			throw new InvalidCmdtyCurrSubTypeException();
 
 		this.secIdType = secIdType;
 	}
@@ -106,7 +114,8 @@ public class GCshCmdtyID_SecIdType extends GCshCmdtyID {
 		if ( nameSpaceLoc.equals(GCshCmdtyCurrNameSpace.CURRENCY) ) {
 			throw new InvalidCmdtyCurrTypeException();
 		} else {
-			result.setType(Type.SECURITY_SECIDTYPE);
+			result.setType(Type.SECURITY);
+			result.setSubType(SubType.SECIDTYPE);
 			result.setNameSpace(nameSpaceLoc);
 			result.setSecIdType(nameSpaceLoc);
 			result.setCode(currSecCodeLoc);
@@ -163,7 +172,10 @@ public class GCshCmdtyID_SecIdType extends GCshCmdtyID {
 
 	@Override
 	public String toStringShort() {
-		if ( type != Type.SECURITY_SECIDTYPE )
+		if ( type != Type.SECURITY )
+			return "ERROR";
+
+		if ( subType != SubType.SECIDTYPE )
 			return "ERROR";
 
 		String result = secIdType.toString() + SEPARATOR + code;
@@ -173,7 +185,10 @@ public class GCshCmdtyID_SecIdType extends GCshCmdtyID {
 
 	@Override
 	public String toStringLong() {
-		if ( type != Type.SECURITY_SECIDTYPE )
+		if ( type != Type.SECURITY )
+			return "ERROR";
+
+		if ( subType != SubType.SECIDTYPE )
 			return "ERROR";
 
 		String result = "GCshCmdtyID_SecIdType [";

@@ -52,7 +52,7 @@ public class TestGCshCmdtyCurrID {
 	public void test02() throws Exception {
 		GCshCmdtyCurrID commCurr = new GCshCmdtyCurrID("EURONEXT", "MBG");
 
-		assertEquals(GCshCmdtyCurrID.Type.SECURITY_GENERAL, commCurr.getType());
+		assertEquals(GCshCmdtyCurrID.Type.SECURITY, commCurr.getType());
 		assertEquals("EURONEXT", commCurr.getNameSpace());
 		assertEquals("MBG", commCurr.getCode());
 		assertEquals("EURONEXT:MBG", commCurr.toString());
@@ -120,7 +120,7 @@ public class TestGCshCmdtyCurrID {
 		GCshCmdtyCurrID commCurrPrs = GCshCmdtyCurrID.parse("EURONEXT:SAP");
 		GCshCmdtyCurrID commCurrRef = new GCshCmdtyCurrID("EURONEXT", "SAP");
 
-		assertEquals(GCshCmdtyCurrID.Type.SECURITY_GENERAL, commCurrPrs.getType());
+		assertEquals(GCshCmdtyCurrID.Type.SECURITY, commCurrPrs.getType());
 		assertEquals("EURONEXT:SAP", commCurrPrs.toString());
 		assertEquals(commCurrRef.toString(), commCurrPrs.toString());
 		assertEquals(commCurrRef.toStringLong(), commCurrPrs.toStringLong());
@@ -139,11 +139,11 @@ public class TestGCshCmdtyCurrID {
 	public void test04_3() throws Exception {
 		GCshCmdtyCurrID commCurrPrs = GCshCmdtyCurrID.parse("FUXNSTUELL:BURP"); // Wrong, but not check on this level
 		GCshCmdtyCurrID commCurrRef = new GCshCmdtyCurrID();
-		commCurrRef.setType(GCshCmdtyCurrID.Type.SECURITY_GENERAL);
+		commCurrRef.setType(GCshCmdtyCurrID.Type.SECURITY);
 		commCurrRef.setNameSpace("FUXNSTUELL");
 		commCurrRef.setCode("BURP");
 
-		assertEquals(GCshCmdtyCurrID.Type.SECURITY_GENERAL, commCurrPrs.getType());
+		assertEquals(GCshCmdtyCurrID.Type.SECURITY, commCurrPrs.getType());
 		assertEquals("FUXNSTUELL:BURP", commCurrPrs.toString());
 		assertEquals(commCurrRef, commCurrPrs);
 
@@ -159,7 +159,8 @@ public class TestGCshCmdtyCurrID {
 	@Test
 	public void test05_1_1() throws Exception {
 		GCshCmdtyID_Exchange cmdtyID = new GCshCmdtyID_Exchange(GCshCmdtyCurrNameSpace.Exchange.EURONEXT, "MBG");
-		assertEquals(GCshCmdtyCurrID.Type.SECURITY_SECIDTYPE, cmdtyID.getType());
+		assertEquals(GCshCmdtyCurrID.Type.SECURITY, cmdtyID.getType());
+		assertEquals(GCshCmdtyID.SubType.EXCHANGE, cmdtyID.getSubType());
 		
 		GCshCmdtyCurrID cmdtyCurrID = new GCshCmdtyCurrID(cmdtyID);
 //		assertEquals(GCshCmdtyCurrID.Type.SECURITY_SECIDTYPE, cmdtyCurrID.getType());
@@ -171,7 +172,8 @@ public class TestGCshCmdtyCurrID {
 	@Test
 	public void test05_1_2() throws Exception {
 		GCshCmdtyID_MIC cmdtyID = new GCshCmdtyID_MIC(GCshCmdtyCurrNameSpace.MIC.XFRA, "MBG");
-		assertEquals(GCshCmdtyCurrID.Type.SECURITY_SECIDTYPE, cmdtyID.getType());
+		assertEquals(GCshCmdtyCurrID.Type.SECURITY, cmdtyID.getType());
+		assertEquals(GCshCmdtyID.SubType.MIC, cmdtyID.getSubType());
 		
 		GCshCmdtyCurrID cmdtyCurrID = new GCshCmdtyCurrID(cmdtyID);
 //		assertEquals(GCshCmdtyCurrID.Type.SECURITY_SECIDTYPE, cmdtyCurrID.getType());
@@ -183,7 +185,8 @@ public class TestGCshCmdtyCurrID {
 	@Test
 	public void test05_1_3() throws Exception {
 		GCshCmdtyID_SecIdType cmdtyID = new GCshCmdtyID_SecIdType(GCshCmdtyCurrNameSpace.SecIdType.ISIN, "DE0007100000");
-		assertEquals(GCshCmdtyCurrID.Type.SECURITY_SECIDTYPE, cmdtyID.getType());
+		assertEquals(GCshCmdtyCurrID.Type.SECURITY, cmdtyID.getType());
+		assertEquals(GCshCmdtyID.SubType.SECIDTYPE, cmdtyID.getSubType());
 		
 		GCshCmdtyCurrID cmdtyCurrID = new GCshCmdtyCurrID(cmdtyID);
 //		assertEquals(GCshCmdtyCurrID.Type.SECURITY_SECIDTYPE, cmdtyCurrID.getType());

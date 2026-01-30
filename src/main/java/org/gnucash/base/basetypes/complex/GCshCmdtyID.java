@@ -14,41 +14,68 @@ import org.slf4j.LoggerFactory;
  */
 public class GCshCmdtyID extends GCshCmdtyCurrID {
 
+    public enum SubType {
+    	EXCHANGE,  // name space is semi-formal abbrev. of major world exchange
+    	MIC,       // name space is formal abbrev. of major world exchange (ISO 10383)
+    	SECIDTYPE, // name space is widely-used security ID type/scheme (ISIN, CUSIP, SEDOL, WKN, ...)
+    	GENERAL,   // name space can be freely chosen
+    	UNSET
+    }
+    
+	// ---------------------------------------------------------------
+
+	@SuppressWarnings("unused")
 	private static final Logger LOGGER = LoggerFactory.getLogger(GCshCmdtyID.class);
 
 	// ---------------------------------------------------------------
 
-	// ::EMPTY
+	protected SubType subType;
 
 	// ---------------------------------------------------------------
 
 	public GCshCmdtyID() {
 		super();
-		type = Type.SECURITY_GENERAL;
+		
+		setType(Type.SECURITY);
+		setSubType (SubType.GENERAL);
 	}
 
 	public GCshCmdtyID(String nameSpaceFree, String code) {
 		super(nameSpaceFree, code);
 		
-		if ( getType() != Type.SECURITY_GENERAL )
+		if ( getType() != Type.SECURITY )
 			throw new InvalidCmdtyCurrTypeException();
+		
+		setType(Type.SECURITY);
+		setSubType (SubType.GENERAL);
 	}
 
 	public GCshCmdtyID(GCshCmdtyCurrID cmdtyCurrID) {
 		super(cmdtyCurrID.getNameSpace(), cmdtyCurrID.getCode());
 
-		if ( getType() != Type.SECURITY_GENERAL )
+		if ( getType() != Type.SECURITY )
 			throw new InvalidCmdtyCurrTypeException();
+		
+		setType(Type.SECURITY);
+		setSubType (SubType.GENERAL);
 	}
 
 	// ---------------------------------------------------------------
 
-	@Override
-	public void setType(Type type) {
-//        if ( type != Type.SECURITY_GENERAL )
+//	@Override
+//	public void setType(Type type) {
+//        if ( type != Type.SECURITY )
 //            throw new InvalidCmdtyCurrIDException();
+//
+//		super.setType(type);
+//	}
 
-		super.setType(type);
+    public SubType getSubType() {
+        return subType;
+    }
+    
+	public void setSubType(SubType subType) {
+		this.subType = subType;
 	}
 
 	// ---------------------------------------------------------------
@@ -74,7 +101,7 @@ public class GCshCmdtyID extends GCshCmdtyCurrID {
 		if ( nameSpaceLoc.equals(GCshCmdtyCurrNameSpace.CURRENCY) ) {
 			throw new InvalidCmdtyCurrIDException();
 		} else {
-			result.setType(Type.SECURITY_GENERAL);
+			result.setType(Type.SECURITY);
 			result.setNameSpace(nameSpaceLoc);
 			result.setCode(currSecCodeLoc);
 		}
@@ -95,7 +122,7 @@ public class GCshCmdtyID extends GCshCmdtyCurrID {
 
 	@Override
 	public String toStringShort() {
-		if ( type != Type.SECURITY_GENERAL )
+		if ( type != Type.SECURITY )
 			return "ERROR";
 
 		String result = super.toStringShort();
@@ -105,13 +132,14 @@ public class GCshCmdtyID extends GCshCmdtyCurrID {
 
 	@Override
 	public String toStringLong() {
-		if ( type != Type.SECURITY_GENERAL )
+		if ( type != Type.SECURITY )
 			return "ERROR";
 
 		String result = "GCshCmdtyID [";
 
-		result += "nameSpace='" + getNameSpace() + "'";
-		result += ", secCode='" + getCode() + "'";
+		result += "nameSpace='" + getNameSpace() + "', ";
+		result += "subtype='"   + getSubType() + "', ";
+		result += "secCode='" + getCode() + "'";
 
 		result += "]";
 
