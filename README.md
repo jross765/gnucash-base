@@ -17,6 +17,14 @@ This might seem overly complicated, but in fact, it was necessary, because the a
 * This repository contains no history before V. 1.7 (cf. notes in parent repo).
 
 ## Major Changes 
+### V. 1.7.1 &rarr; 1.8
+
+* Package "`basetypes.complex`": Introduced sub-type: Moved part of the entries in `GCshCmdtyCurrID.Type` to `GCshCmdtyID.SubType `.
+* Some additional minor improvements (more variants for constructors).
+
+### V. 1.7 &rarr; 1.7.1
+Only technical changes, essentially (i.e. code) unchanged.
+
 ### V. 1.6 &rarr; 1.7
 * Introduced new (dummy) ID types: `GCshAcctID`, `GCshTrxID`, etc., all derived from `GCshID`.
 
@@ -33,6 +41,10 @@ This might seem overly complicated, but in fact, it was necessary, because the a
 
 ### V. 1.4 &rarr; 1.5
 * `FixedPointNumber`: Ironed out some inconsistencies: Some methods would change the (value of the) object itself, some others would not and instead generate a new one. Now, every calc-operation changes the (value of the) object itself. 
+
+  **CAUTION: This means that, as opposed to many (all?) other `number`-based Java classes, `FixedPointNumber` is *not* immutable.** 
+  Having it that way is, de facto, less of a *design* decision and more of a tribute to the *history* of the projects `JGnuCashLib(NTools)` and `JKMyMoneyLibNTools`
+  (and there are other things to say about this class, but let's not digress...).
 
   This admittedly leads to less-than-beautiful code in the other modules, because you now have to use the method `copy()` a lot of times, but we had to do so before the changes anyway here and there, and at least it's consistent now.
 
