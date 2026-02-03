@@ -1,16 +1,16 @@
 package org.gnucash.base.basetypes.complex;
 
-public class InvalidCmdtyCurrTypeException extends RuntimeException {
+public class InvalidCmdtyTypeException extends RuntimeException {
 
     private static final long serialVersionUID = 6595261905782442716L;
     
     // ---------------------------------------------------------------
     
-    public InvalidCmdtyCurrTypeException() {
+    public InvalidCmdtyTypeException() {
     	super();
     }
 
-    public InvalidCmdtyCurrTypeException(String msg) {
+    public InvalidCmdtyTypeException(String msg) {
     	super(msg);
     }
 

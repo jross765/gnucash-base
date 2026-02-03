@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 /**
  * A fully-qualified currency ID (name space "CURRENCY").
  */
-public class GCshCurrID extends GCshCmdtyCurrID {
+public class GCshCurrID extends GCshCmdtyID {
 
 	@SuppressWarnings("unused")
 	private static final Logger LOGGER = LoggerFactory.getLogger(GCshCurrID.class);
@@ -26,14 +26,14 @@ public class GCshCurrID extends GCshCmdtyCurrID {
 	}
 
 	public GCshCurrID(Currency curr) {
-		super(GCshCmdtyCurrNameSpace.CURRENCY, curr.getCurrencyCode());
+		super(GCshCmdtyNameSpace.CURRENCY, curr.getCurrencyCode());
 
 		setType(Type.CURRENCY);
 		setCurrency(curr);
 	}
 
 	public GCshCurrID(String currStr) {
-		super(GCshCmdtyCurrNameSpace.CURRENCY, currStr);
+		super(GCshCmdtyNameSpace.CURRENCY, currStr);
 
 		setType(Type.CURRENCY);
 		setCurrency(currStr);
@@ -43,18 +43,18 @@ public class GCshCurrID extends GCshCmdtyCurrID {
 		super(nameSpaceFree, code);
 
 		if ( getType() != Type.CURRENCY )
-			throw new InvalidCmdtyCurrTypeException();
+			throw new InvalidCmdtyTypeException();
 
 		setType(Type.CURRENCY);
 		setCurrency(code);
 	}
 
-	public GCshCurrID(GCshCmdtyCurrID cmdtyCurrID) {
+	public GCshCurrID(GCshCmdtyID cmdtyCurrID) {
 
 		super(cmdtyCurrID.getNameSpace(), cmdtyCurrID.getCode());
 
 		if ( getType() != Type.CURRENCY )
-			throw new InvalidCmdtyCurrTypeException();
+			throw new InvalidCmdtyTypeException();
 
 		setType(Type.CURRENCY);
 		setCurrency(code);
@@ -74,14 +74,14 @@ public class GCshCurrID extends GCshCmdtyCurrID {
 
 	public Currency getCurrency() {
 		if ( type != Type.CURRENCY )
-			throw new InvalidCmdtyCurrTypeException();
+			throw new InvalidCmdtyTypeException();
 
 		return currency;
 	}
 
 	public void setCurrency(Currency curr) {
 		if ( type != Type.CURRENCY )
-			throw new InvalidCmdtyCurrTypeException();
+			throw new InvalidCmdtyTypeException();
 
 		if ( curr == null )
 			throw new IllegalArgumentException("argument <curr> is null");
@@ -115,18 +115,18 @@ public class GCshCurrID extends GCshCmdtyCurrID {
 		// Plausi ::MAGIC
 		if ( posSep <= 3 || 
 			 posSep >= str.length() - 2 )
-			throw new InvalidCmdtyCurrIDException();
+			throw new InvalidCmdtyIDException();
 
 		String nameSpaceLoc = str.substring(0, posSep).trim();
 		String currSecCodeLoc = str.substring(posSep + 1, str.length()).trim();
 
-		if ( nameSpaceLoc.equals(GCshCmdtyCurrNameSpace.CURRENCY) ) {
+		if ( nameSpaceLoc.equals(GCshCmdtyNameSpace.CURRENCY) ) {
 			result.setType(Type.CURRENCY);
 			result.setNameSpace(nameSpaceLoc);
 			result.setCurrency(Currency.getInstance(currSecCodeLoc));
 			// result.setCode(currSecCodeLoc);
 		} else {
-			throw new InvalidCmdtyCurrIDException();
+			throw new InvalidCmdtyIDException();
 		}
 
 		return result;
@@ -174,7 +174,7 @@ public class GCshCurrID extends GCshCmdtyCurrID {
 		if ( type != Type.CURRENCY )
 			return "ERROR";
 
-		String result = GCshCmdtyCurrNameSpace.CURRENCY.toString() + SEPARATOR + currency.getCurrencyCode();
+		String result = GCshCmdtyNameSpace.CURRENCY.toString() + SEPARATOR + currency.getCurrencyCode();
 
 		return result;
 	}
@@ -190,7 +190,7 @@ public class GCshCurrID extends GCshCmdtyCurrID {
 
 		try {
 			result += ", currency='" + getCurrency().getCurrencyCode() + "'";
-		} catch (InvalidCmdtyCurrTypeException e) {
+		} catch (InvalidCmdtyTypeException e) {
 			result += ", currency=" + "ERROR";
 		}
 

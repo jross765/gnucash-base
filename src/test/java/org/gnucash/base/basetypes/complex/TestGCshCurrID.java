@@ -25,7 +25,7 @@ public class TestGCshCurrID {
 		GCshCurrID commCurr = new GCshCurrID(Currency.getInstance("EUR"));
 
 		assertEquals(GCshCurrID.Type.CURRENCY, commCurr.getType());
-		assertEquals(GCshCmdtyCurrNameSpace.CURRENCY, commCurr.getNameSpace());
+		assertEquals(GCshCmdtyNameSpace.CURRENCY, commCurr.getNameSpace());
 		assertEquals("EUR", commCurr.getCode());
 		assertEquals("EUR", commCurr.getCurrency().getCurrencyCode());
 		assertEquals("CURRENCY:EUR", commCurr.toString());
@@ -35,7 +35,7 @@ public class TestGCshCurrID {
 		commCurr = new GCshCurrID(Currency.getInstance("USD"));
 
 		assertEquals(GCshCurrID.Type.CURRENCY, commCurr.getType());
-		assertEquals(GCshCmdtyCurrNameSpace.CURRENCY, commCurr.getNameSpace());
+		assertEquals(GCshCmdtyNameSpace.CURRENCY, commCurr.getNameSpace());
 		assertEquals("USD", commCurr.getCode());
 		assertEquals("USD", commCurr.getCurrency().getCurrencyCode());
 		assertEquals("CURRENCY:USD", commCurr.toString());

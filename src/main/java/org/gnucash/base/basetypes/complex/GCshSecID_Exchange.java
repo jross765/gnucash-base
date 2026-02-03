@@ -5,26 +5,26 @@ import org.slf4j.LoggerFactory;
 
 /**
  * A fully-qualified (real) commodity ID (name space
- * {@link GCshCmdtyCurrNameSpace.Exchange}).
+ * {@link GCshCmdtyNameSpace.Exchange}).
  */
-public class GCshCmdtyID_Exchange extends GCshCmdtyID {
+public class GCshSecID_Exchange extends GCshSecID {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(GCshCmdtyID_Exchange.class);
-
-	// ---------------------------------------------------------------
-
-	private GCshCmdtyCurrNameSpace.Exchange exchange;
+	private static final Logger LOGGER = LoggerFactory.getLogger(GCshSecID_Exchange.class);
 
 	// ---------------------------------------------------------------
 
-	public GCshCmdtyID_Exchange() {
+	private GCshCmdtyNameSpace.Exchange exchange;
+
+	// ---------------------------------------------------------------
+
+	public GCshSecID_Exchange() {
 		super();
 		// setType(Type.SECURITY);
 		setSubType(SubType.EXCHANGE);
-		setExchange(GCshCmdtyCurrNameSpace.Exchange.UNSET);
+		setExchange(GCshCmdtyNameSpace.Exchange.UNSET);
 	}
 
-	public GCshCmdtyID_Exchange(GCshCmdtyCurrNameSpace.Exchange exchange, String secCode) {
+	public GCshSecID_Exchange(GCshCmdtyNameSpace.Exchange exchange, String secCode) {
 		super(exchange.toString(), secCode);
 
 		// setType(Type.SECURITY);
@@ -32,7 +32,7 @@ public class GCshCmdtyID_Exchange extends GCshCmdtyID {
 		setExchange(exchange);
 	}
 
-	public GCshCmdtyID_Exchange(String exchangeStr, String code) {
+	public GCshSecID_Exchange(String exchangeStr, String code) {
 		super(exchangeStr, code);
 
 		// setType(Type.SECURITY);
@@ -52,22 +52,22 @@ public class GCshCmdtyID_Exchange extends GCshCmdtyID {
 
 	// ----------------------------
 
-	public GCshCmdtyCurrNameSpace.Exchange getExchange() {
+	public GCshCmdtyNameSpace.Exchange getExchange() {
 		if ( type != Type.SECURITY )
-			throw new InvalidCmdtyCurrTypeException();
+			throw new InvalidCmdtyTypeException();
 
 		if ( subType != SubType.EXCHANGE )
-			throw new InvalidCmdtyCurrSubTypeException();
+			throw new InvalidCmdtySubTypeException();
 
 		return exchange;
 	}
 
-	public void setExchange(GCshCmdtyCurrNameSpace.Exchange exchange) {
+	public void setExchange(GCshCmdtyNameSpace.Exchange exchange) {
 		if ( type != Type.SECURITY )
-			throw new InvalidCmdtyCurrTypeException();
+			throw new InvalidCmdtyTypeException();
 
 		if ( subType != SubType.EXCHANGE )
-			throw new InvalidCmdtyCurrSubTypeException();
+			throw new InvalidCmdtySubTypeException();
 
 		this.exchange = exchange;
 	}
@@ -79,31 +79,31 @@ public class GCshCmdtyID_Exchange extends GCshCmdtyID {
 		if ( exchangeStr.trim().equals("") )
 			throw new IllegalArgumentException("Exchange string is empty");
 
-		setExchange(GCshCmdtyCurrNameSpace.Exchange.valueOf(exchangeStr.trim()));
+		setExchange(GCshCmdtyNameSpace.Exchange.valueOf(exchangeStr.trim()));
 	}
 
 	// ---------------------------------------------------------------
 
-	public static GCshCmdtyID_Exchange parse(String str) {
+	public static GCshSecID_Exchange parse(String str) {
 		if ( str == null )
 			throw new IllegalArgumentException("Argument string is null");
 
 		if ( str.equals("") )
 			throw new IllegalArgumentException("Argument string is empty");
 
-		GCshCmdtyID_Exchange result = new GCshCmdtyID_Exchange();
+		GCshSecID_Exchange result = new GCshSecID_Exchange();
 
 		int posSep = str.indexOf(SEPARATOR);
 		// Plausi ::MAGIC
 		if ( posSep <= 3 || 
 			 posSep >= str.length() - 2 )
-			throw new InvalidCmdtyCurrIDException();
+			throw new InvalidCmdtyIDException();
 
 		String nameSpaceLoc = str.substring(0, posSep).trim();
 		String currSecCodeLoc = str.substring(posSep + 1, str.length()).trim();
 
-		if ( nameSpaceLoc.equals(GCshCmdtyCurrNameSpace.CURRENCY) ) {
-			throw new InvalidCmdtyCurrTypeException();
+		if ( nameSpaceLoc.equals(GCshCmdtyNameSpace.CURRENCY) ) {
+			throw new InvalidCmdtyTypeException();
 		} else {
 			result.setType(Type.SECURITY);
 			result.setSubType(SubType.EXCHANGE);
@@ -136,7 +136,7 @@ public class GCshCmdtyID_Exchange extends GCshCmdtyID {
 			return false;
 		if ( getClass() != obj.getClass() )
 			return false;
-		GCshCmdtyID_Exchange other = (GCshCmdtyID_Exchange) obj;
+		GCshSecID_Exchange other = (GCshSecID_Exchange) obj;
 		if ( type != other.type )
 			return false;
 		if ( exchange != other.exchange )
@@ -188,7 +188,7 @@ public class GCshCmdtyID_Exchange extends GCshCmdtyID {
 
 		try {
 			result += ", exchange='" + getExchange() + "'";
-		} catch (InvalidCmdtyCurrTypeException e) {
+		} catch (InvalidCmdtyTypeException e) {
 			result += ", exchange=" + "ERROR";
 		}
 

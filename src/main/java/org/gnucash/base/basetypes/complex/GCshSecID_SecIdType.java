@@ -5,27 +5,27 @@ import org.slf4j.LoggerFactory;
 
 /**
  * A fully-qualified (real) commodity ID (name space
- * {@link GCshCmdtyCurrNameSpace.SecIdType}).
+ * {@link GCshCmdtyNameSpace.SecIdType}).
  */
-public class GCshCmdtyID_SecIdType extends GCshCmdtyID {
+public class GCshSecID_SecIdType extends GCshSecID {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(GCshCmdtyID_SecIdType.class);
-
-	// ---------------------------------------------------------------
-
-	private GCshCmdtyCurrNameSpace.SecIdType secIdType;
+	private static final Logger LOGGER = LoggerFactory.getLogger(GCshSecID_SecIdType.class);
 
 	// ---------------------------------------------------------------
 
-	public GCshCmdtyID_SecIdType() {
+	private GCshCmdtyNameSpace.SecIdType secIdType;
+
+	// ---------------------------------------------------------------
+
+	public GCshSecID_SecIdType() {
 		super();
 		
 		// setType(Type.SECURITY);
 		setSubType(SubType.SECIDTYPE);
-		setSecIdType(GCshCmdtyCurrNameSpace.SecIdType.UNSET);
+		setSecIdType(GCshCmdtyNameSpace.SecIdType.UNSET);
 	}
 
-	public GCshCmdtyID_SecIdType(GCshCmdtyCurrNameSpace.SecIdType secIdType, String secCode) {
+	public GCshSecID_SecIdType(GCshCmdtyNameSpace.SecIdType secIdType, String secCode) {
 		super(secIdType.toString(), secCode);
 
 		// setType(Type.SECURITY);
@@ -33,7 +33,7 @@ public class GCshCmdtyID_SecIdType extends GCshCmdtyID {
 		setSecIdType(secIdType);
 	}
 
-	public GCshCmdtyID_SecIdType(String secIDTypeStr, String code) {
+	public GCshSecID_SecIdType(String secIDTypeStr, String code) {
 		super(secIDTypeStr, code);
 
 		// setType(Type.SECURITY);
@@ -53,22 +53,22 @@ public class GCshCmdtyID_SecIdType extends GCshCmdtyID {
 
 	// ----------------------------
 
-	public GCshCmdtyCurrNameSpace.SecIdType getSecIdType() {
+	public GCshCmdtyNameSpace.SecIdType getSecIdType() {
 		if ( type != Type.SECURITY )
-			throw new InvalidCmdtyCurrTypeException();
+			throw new InvalidCmdtyTypeException();
 
 		if ( subType != SubType.SECIDTYPE )
-			throw new InvalidCmdtyCurrSubTypeException();
+			throw new InvalidCmdtySubTypeException();
 
 		return secIdType;
 	}
 
-	public void setSecIdType(GCshCmdtyCurrNameSpace.SecIdType secIdType) {
+	public void setSecIdType(GCshCmdtyNameSpace.SecIdType secIdType) {
 		if ( type != Type.SECURITY )
-			throw new InvalidCmdtyCurrTypeException();
+			throw new InvalidCmdtyTypeException();
 
 		if ( subType != SubType.SECIDTYPE )
-			throw new InvalidCmdtyCurrSubTypeException();
+			throw new InvalidCmdtySubTypeException();
 
 		this.secIdType = secIdType;
 	}
@@ -80,12 +80,12 @@ public class GCshCmdtyID_SecIdType extends GCshCmdtyID {
 		if ( secIdTypeStr.trim().equals("") )
 			throw new IllegalArgumentException("Security ID type string is empty");
 
-		setSecIdType(GCshCmdtyCurrNameSpace.SecIdType.valueOf(secIdTypeStr.trim()));
+		setSecIdType(GCshCmdtyNameSpace.SecIdType.valueOf(secIdTypeStr.trim()));
 	}
 
 	// ---------------------------------------------------------------
 	
-	public void set(GCshCmdtyID_SecIdType val) {
+	public void set(GCshSecID_SecIdType val) {
 		setType(val.getType());
 		setSecIdType(val.getSecIdType());
 		setCode(val.getCode());
@@ -93,26 +93,26 @@ public class GCshCmdtyID_SecIdType extends GCshCmdtyID {
 
 	// ---------------------------------------------------------------
 
-	public static GCshCmdtyID_SecIdType parse(String str) {
+	public static GCshSecID_SecIdType parse(String str) {
 		if ( str == null )
 			throw new IllegalArgumentException("Argument string is null");
 
 		if ( str.equals("") )
 			throw new IllegalArgumentException("Argument string is empty");
 
-		GCshCmdtyID_SecIdType result = new GCshCmdtyID_SecIdType();
+		GCshSecID_SecIdType result = new GCshSecID_SecIdType();
 
 		int posSep = str.indexOf(SEPARATOR);
 		// Plausi ::MAGIC
 		if ( posSep <= 3 || 
 			 posSep >= str.length() - 2 )
-			throw new InvalidCmdtyCurrIDException();
+			throw new InvalidCmdtyIDException();
 
 		String nameSpaceLoc = str.substring(0, posSep).trim();
 		String currSecCodeLoc = str.substring(posSep + 1, str.length()).trim();
 
-		if ( nameSpaceLoc.equals(GCshCmdtyCurrNameSpace.CURRENCY) ) {
-			throw new InvalidCmdtyCurrTypeException();
+		if ( nameSpaceLoc.equals(GCshCmdtyNameSpace.CURRENCY) ) {
+			throw new InvalidCmdtyTypeException();
 		} else {
 			result.setType(Type.SECURITY);
 			result.setSubType(SubType.SECIDTYPE);
@@ -145,7 +145,7 @@ public class GCshCmdtyID_SecIdType extends GCshCmdtyID {
 			return false;
 		if ( getClass() != obj.getClass() )
 			return false;
-		GCshCmdtyID_SecIdType other = (GCshCmdtyID_SecIdType) obj;
+		GCshSecID_SecIdType other = (GCshSecID_SecIdType) obj;
 		if ( type != other.type )
 			return false;
 		if ( secIdType != other.secIdType )
@@ -197,7 +197,7 @@ public class GCshCmdtyID_SecIdType extends GCshCmdtyID {
 
 		try {
 			result += ", secidtype='" + getSecIdType() + "'";
-		} catch (InvalidCmdtyCurrTypeException e) {
+		} catch (InvalidCmdtyTypeException e) {
 			result += ", secidtype=" + "ERROR";
 		}
 

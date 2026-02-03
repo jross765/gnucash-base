@@ -6,33 +6,33 @@ import org.junit.Test;
 
 import junit.framework.JUnit4TestAdapter;
 
-public class TestGCshCmdtyID_MIC {
+public class TestGCshSecID_MIC {
 	public static void main(String[] args) throws Exception {
 		junit.textui.TestRunner.run(suite());
 	}
 
 	@SuppressWarnings("exports")
 	public static junit.framework.Test suite() {
-		return new JUnit4TestAdapter(TestGCshCmdtyID_MIC.class);
+		return new JUnit4TestAdapter(TestGCshSecID_MIC.class);
 	}
 
 	// -----------------------------------------------------------------
 
 	@Test
 	public void test02() throws Exception {
-		GCshCmdtyID_MIC cmdty = new GCshCmdtyID_MIC(GCshCmdtyCurrNameSpace.MIC.XFRA, "MBG");
+		GCshSecID_MIC cmdty = new GCshSecID_MIC(GCshCmdtyNameSpace.MIC.XFRA, "MBG");
 
-		assertEquals(GCshCmdtyCurrID.Type.SECURITY, cmdty.getType());
-		assertEquals(GCshCmdtyID.SubType.MIC, cmdty.getSubType());
-		assertEquals(GCshCmdtyCurrNameSpace.MIC.XFRA, cmdty.getMIC());
+		assertEquals(GCshCmdtyID.Type.SECURITY, cmdty.getType());
+		assertEquals(GCshSecID.SubType.MIC, cmdty.getSubType());
+		assertEquals(GCshCmdtyNameSpace.MIC.XFRA, cmdty.getMIC());
 		assertEquals("MBG", cmdty.getCode());
 		assertEquals("XFRA:MBG", cmdty.toString());
 	}
 
 	@Test
 	public void test03() throws Exception {
-		GCshCmdtyID_MIC cmdty1 = new GCshCmdtyID_MIC(GCshCmdtyCurrNameSpace.MIC.XFRA, "MBG");
-		GCshCmdtyID_MIC cmdty2 = new GCshCmdtyID_MIC("XFRA", "MBG");
+		GCshSecID_MIC cmdty1 = new GCshSecID_MIC(GCshCmdtyNameSpace.MIC.XFRA, "MBG");
+		GCshSecID_MIC cmdty2 = new GCshSecID_MIC("XFRA", "MBG");
 
 		assertEquals(cmdty1.toString(), cmdty2.toString());
 		assertEquals(cmdty1.toStringLong(), cmdty2.toStringLong());
@@ -50,11 +50,11 @@ public class TestGCshCmdtyID_MIC {
 
 	@Test
 	public void test04_2() throws Exception {
-		GCshCmdtyID_MIC cmdtyPrs = GCshCmdtyID_MIC.parse("XFRA:SAP");
-		GCshCmdtyID_MIC cmdtyRef = new GCshCmdtyID_MIC(GCshCmdtyCurrNameSpace.MIC.XFRA, "SAP");
+		GCshSecID_MIC cmdtyPrs = GCshSecID_MIC.parse("XFRA:SAP");
+		GCshSecID_MIC cmdtyRef = new GCshSecID_MIC(GCshCmdtyNameSpace.MIC.XFRA, "SAP");
 
-		assertEquals(GCshCmdtyCurrID.Type.SECURITY, cmdtyPrs.getType());
-		assertEquals(GCshCmdtyID.SubType.MIC, cmdtyPrs.getSubType());
+		assertEquals(GCshCmdtyID.Type.SECURITY, cmdtyPrs.getType());
+		assertEquals(GCshSecID.SubType.MIC, cmdtyPrs.getSubType());
 		assertEquals("XFRA:SAP", cmdtyPrs.toString());
 		assertEquals(cmdtyRef.toString(), cmdtyPrs.toString());
 		assertEquals(cmdtyRef.toStringLong(), cmdtyPrs.toStringLong());
@@ -72,7 +72,7 @@ public class TestGCshCmdtyID_MIC {
 	@Test
 	public void test04_3() throws Exception {
 		try {
-			GCshCmdtyID_MIC cmdtyPrs = GCshCmdtyID_MIC.parse("FUXNSTUELL:BURP");
+			GCshSecID_MIC cmdtyPrs = GCshSecID_MIC.parse("FUXNSTUELL:BURP");
 			assertEquals(1, 0);
 		} catch (Exception exc) {
 			assertEquals(0, 0);

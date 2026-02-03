@@ -5,27 +5,27 @@ import org.slf4j.LoggerFactory;
 
 /**
  * A fully-qualified (real) commodity ID (name space
- * {@link GCshCmdtyCurrNameSpace.MIC}).
+ * {@link GCshCmdtyNameSpace.MIC}).
  */
-public class GCshCmdtyID_MIC extends GCshCmdtyID {
+public class GCshSecID_MIC extends GCshSecID {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(GCshCmdtyID_MIC.class);
-
-	// ---------------------------------------------------------------
-
-	private GCshCmdtyCurrNameSpace.MIC mic;
+	private static final Logger LOGGER = LoggerFactory.getLogger(GCshSecID_MIC.class);
 
 	// ---------------------------------------------------------------
 
-	public GCshCmdtyID_MIC() {
+	private GCshCmdtyNameSpace.MIC mic;
+
+	// ---------------------------------------------------------------
+
+	public GCshSecID_MIC() {
 		super();
 		
 		// setType(Type.SECURITY);
 		setSubType(SubType.MIC);
-		setMIC(GCshCmdtyCurrNameSpace.MIC.UNSET);
+		setMIC(GCshCmdtyNameSpace.MIC.UNSET);
 	}
 
-	public GCshCmdtyID_MIC(GCshCmdtyCurrNameSpace.MIC mic, String secCode) {
+	public GCshSecID_MIC(GCshCmdtyNameSpace.MIC mic, String secCode) {
 		super(mic.toString(), secCode);
 
 		// setType(Type.SECURITY);
@@ -33,7 +33,7 @@ public class GCshCmdtyID_MIC extends GCshCmdtyID {
 		setMIC(mic);
 	}
 
-	public GCshCmdtyID_MIC(String micStr, String code) {
+	public GCshSecID_MIC(String micStr, String code) {
 		super(micStr, code);
 
 		// setType(Type.SECURITY);
@@ -53,22 +53,22 @@ public class GCshCmdtyID_MIC extends GCshCmdtyID {
 
 	// ----------------------------
 
-	public GCshCmdtyCurrNameSpace.MIC getMIC() {
+	public GCshCmdtyNameSpace.MIC getMIC() {
 		if ( type != Type.SECURITY )
-			throw new InvalidCmdtyCurrTypeException();
+			throw new InvalidCmdtyTypeException();
 
 		if ( subType != SubType.MIC )
-			throw new InvalidCmdtyCurrSubTypeException();
+			throw new InvalidCmdtySubTypeException();
 
 		return mic;
 	}
 
-	public void setMIC(GCshCmdtyCurrNameSpace.MIC mic) {
+	public void setMIC(GCshCmdtyNameSpace.MIC mic) {
 		if ( type != Type.SECURITY )
-			throw new InvalidCmdtyCurrTypeException();
+			throw new InvalidCmdtyTypeException();
 
 		if ( subType != SubType.MIC )
-			throw new InvalidCmdtyCurrSubTypeException();
+			throw new InvalidCmdtySubTypeException();
 
 		this.mic = mic;
 	}
@@ -80,31 +80,31 @@ public class GCshCmdtyID_MIC extends GCshCmdtyID {
 		if ( micStr.trim().equals("") )
 			throw new IllegalArgumentException("MIC string is empty");
 
-		setMIC(GCshCmdtyCurrNameSpace.MIC.valueOf(micStr.trim()));
+		setMIC(GCshCmdtyNameSpace.MIC.valueOf(micStr.trim()));
 	}
 
 	// ---------------------------------------------------------------
 
-	public static GCshCmdtyID_MIC parse(String str) {
+	public static GCshSecID_MIC parse(String str) {
 		if ( str == null )
 			throw new IllegalArgumentException("Argument string is null");
 
 		if ( str.equals("") )
 			throw new IllegalArgumentException("Argument string is empty");
 
-		GCshCmdtyID_MIC result = new GCshCmdtyID_MIC();
+		GCshSecID_MIC result = new GCshSecID_MIC();
 
 		int posSep = str.indexOf(SEPARATOR);
 		// Plausi ::MAGIC
 		if ( posSep <= 3 || 
 			 posSep >= str.length() - 2 )
-			throw new InvalidCmdtyCurrIDException();
+			throw new InvalidCmdtyIDException();
 
 		String nameSpaceLoc = str.substring(0, posSep).trim();
 		String currSecCodeLoc = str.substring(posSep + 1, str.length()).trim();
 
-		if ( nameSpaceLoc.equals(GCshCmdtyCurrNameSpace.CURRENCY) ) {
-			throw new InvalidCmdtyCurrTypeException();
+		if ( nameSpaceLoc.equals(GCshCmdtyNameSpace.CURRENCY) ) {
+			throw new InvalidCmdtyTypeException();
 		} else {
 			result.setType(Type.SECURITY);
 			result.setSubType(SubType.MIC);
@@ -137,7 +137,7 @@ public class GCshCmdtyID_MIC extends GCshCmdtyID {
 			return false;
 		if ( getClass() != obj.getClass() )
 			return false;
-		GCshCmdtyID_MIC other = (GCshCmdtyID_MIC) obj;
+		GCshSecID_MIC other = (GCshSecID_MIC) obj;
 		if ( type != other.type )
 			return false;
 		if ( mic != other.mic )
@@ -189,7 +189,7 @@ public class GCshCmdtyID_MIC extends GCshCmdtyID {
 
 		try {
 			result += ", mic='" + getMIC() + "'";
-		} catch (InvalidCmdtyCurrTypeException e) {
+		} catch (InvalidCmdtyTypeException e) {
 			result += ", mic=" + "ERROR";
 		}
 

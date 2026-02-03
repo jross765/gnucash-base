@@ -20,7 +20,8 @@ public class TestGCshID {
     	junit.textui.TestRunner.run(suite());
     }
 
-    public static junit.framework.Test suite() {
+    @SuppressWarnings("exports")
+	public static junit.framework.Test suite() {
     	return new JUnit4TestAdapter(TestGCshID.class);
     }
 

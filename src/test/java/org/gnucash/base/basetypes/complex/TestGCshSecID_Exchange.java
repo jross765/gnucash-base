@@ -6,33 +6,33 @@ import org.junit.Test;
 
 import junit.framework.JUnit4TestAdapter;
 
-public class TestGCshCmdtyID_Exchange {
+public class TestGCshSecID_Exchange {
 	public static void main(String[] args) throws Exception {
 		junit.textui.TestRunner.run(suite());
 	}
 
 	@SuppressWarnings("exports")
 	public static junit.framework.Test suite() {
-		return new JUnit4TestAdapter(TestGCshCmdtyID_Exchange.class);
+		return new JUnit4TestAdapter(TestGCshSecID_Exchange.class);
 	}
 
 	// -----------------------------------------------------------------
 
 	@Test
 	public void test02() throws Exception {
-		GCshCmdtyID_Exchange commCurr = new GCshCmdtyID_Exchange(GCshCmdtyCurrNameSpace.Exchange.EURONEXT, "MBG");
+		GCshSecID_Exchange commCurr = new GCshSecID_Exchange(GCshCmdtyNameSpace.Exchange.EURONEXT, "MBG");
 
-		assertEquals(GCshCmdtyCurrID.Type.SECURITY, commCurr.getType());
-		assertEquals(GCshCmdtyID.SubType.EXCHANGE, commCurr.getSubType());
-		assertEquals(GCshCmdtyCurrNameSpace.Exchange.EURONEXT, commCurr.getExchange());
+		assertEquals(GCshCmdtyID.Type.SECURITY, commCurr.getType());
+		assertEquals(GCshSecID.SubType.EXCHANGE, commCurr.getSubType());
+		assertEquals(GCshCmdtyNameSpace.Exchange.EURONEXT, commCurr.getExchange());
 		assertEquals("MBG", commCurr.getCode());
 		assertEquals("EURONEXT:MBG", commCurr.toString());
 	}
 
 	@Test
 	public void test03() throws Exception {
-		GCshCmdtyID_Exchange commCurr1 = new GCshCmdtyID_Exchange(GCshCmdtyCurrNameSpace.Exchange.EURONEXT, "MBG");
-		GCshCmdtyID_Exchange commCurr2 = new GCshCmdtyID_Exchange("EURONEXT", "MBG");
+		GCshSecID_Exchange commCurr1 = new GCshSecID_Exchange(GCshCmdtyNameSpace.Exchange.EURONEXT, "MBG");
+		GCshSecID_Exchange commCurr2 = new GCshSecID_Exchange("EURONEXT", "MBG");
 
 		assertEquals(commCurr1.toString(), commCurr2.toString());
 		assertEquals(commCurr1.toStringLong(), commCurr2.toStringLong());
@@ -50,11 +50,11 @@ public class TestGCshCmdtyID_Exchange {
 
 	@Test
 	public void test04_2() throws Exception {
-		GCshCmdtyID_Exchange commCurrPrs = GCshCmdtyID_Exchange.parse("EURONEXT:SAP");
-		GCshCmdtyID_Exchange commCurrRef = new GCshCmdtyID_Exchange(GCshCmdtyCurrNameSpace.Exchange.EURONEXT, "SAP");
+		GCshSecID_Exchange commCurrPrs = GCshSecID_Exchange.parse("EURONEXT:SAP");
+		GCshSecID_Exchange commCurrRef = new GCshSecID_Exchange(GCshCmdtyNameSpace.Exchange.EURONEXT, "SAP");
 
-		assertEquals(GCshCmdtyCurrID.Type.SECURITY, commCurrPrs.getType());
-		assertEquals(GCshCmdtyID.SubType.EXCHANGE, commCurrPrs.getSubType());
+		assertEquals(GCshCmdtyID.Type.SECURITY, commCurrPrs.getType());
+		assertEquals(GCshSecID.SubType.EXCHANGE, commCurrPrs.getSubType());
 		assertEquals("EURONEXT:SAP", commCurrPrs.toString());
 		assertEquals(commCurrRef.toString(), commCurrPrs.toString());
 		assertEquals(commCurrRef.toStringLong(), commCurrPrs.toStringLong());
@@ -72,7 +72,7 @@ public class TestGCshCmdtyID_Exchange {
 	@Test
 	public void test04_3() throws Exception {
 		try {
-			GCshCmdtyID_Exchange commCurrPrs = GCshCmdtyID_Exchange.parse("FUXNSTUELL:BURP");
+			GCshSecID_Exchange commCurrPrs = GCshSecID_Exchange.parse("FUXNSTUELL:BURP");
 			assertEquals(1, 0);
 		} catch (Exception exc) {
 			assertEquals(0, 0);

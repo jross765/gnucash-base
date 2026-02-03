@@ -14,10 +14,10 @@ package org.gnucash.base.basetypes.complex;
  * to the enum CmdtyCurrNameSpace.Exchange or to open another enum
  * in this class, if you absolutely need it. After all, this is FOSS...)
  */
-public class GCshCmdtyCurrNameSpace {
+public class GCshCmdtyNameSpace {
 
     // Currency: Note that the old "ISO4217" has been deprecated
-    public static final String CURRENCY = GCshCmdtyCurrID.Type.CURRENCY.toString();
+    public static final String CURRENCY = GCshCmdtyID.Type.CURRENCY.toString();
     
     // Semi-formal, non-standardized but widely-used abbreviations 
     // of major exchanges
