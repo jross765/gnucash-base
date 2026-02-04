@@ -191,7 +191,7 @@ public class GCshSecID_SecIdType extends GCshSecID {
 		if ( subType != SubType.SECIDTYPE )
 			return "ERROR";
 
-		String result = "GCshCmdtyID_SecIdType [";
+		String result = "GCshSecID_SecIdType [";
 
 		result += "namespace='" + getNameSpace() + "'";
 

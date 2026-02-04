@@ -183,7 +183,7 @@ public class GCshSecID_MIC extends GCshSecID {
 		if ( subType != SubType.MIC )
 			return "ERROR";
 
-		String result = "GCshCmdtyID_MIC [";
+		String result = "GCshSecID_MIC [";
 
 		result += "namespace='" + getNameSpace() + "'";
 

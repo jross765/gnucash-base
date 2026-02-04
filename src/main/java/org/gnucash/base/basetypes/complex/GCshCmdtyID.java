@@ -268,7 +268,7 @@ public class GCshCmdtyID {
     }
 
     public String toStringLong() {
-    	String result = "GCshCmdtyCurrID [";
+    	String result = "GCshCmdtyID [";
 	
     	result += "type='"      + getType() + "', ";
     	result += "nameSpace='" + getNameSpace() + "', ";

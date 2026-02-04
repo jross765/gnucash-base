@@ -182,7 +182,7 @@ public class GCshSecID_Exchange extends GCshSecID {
 		if ( subType != SubType.EXCHANGE )
 			return "ERROR";
 
-		String result = "GCshCmdtyID_Exchange [";
+		String result = "GCshSecID_Exchange [";
 
 		result += "namespace='" + getNameSpace() + "'";
 

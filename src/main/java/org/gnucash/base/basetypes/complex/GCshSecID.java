@@ -135,7 +135,7 @@ public class GCshSecID extends GCshCmdtyID {
 		if ( type != Type.SECURITY )
 			return "ERROR";
 
-		String result = "GCshCmdtyID [";
+		String result = "GCshSecID [";
 
 		result += "nameSpace='" + getNameSpace() + "', ";
 		result += "subtype='"   + getSubType() + "', ";
