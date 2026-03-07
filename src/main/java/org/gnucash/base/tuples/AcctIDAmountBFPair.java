@@ -1,10 +1,9 @@
 package org.gnucash.base.tuples;
 
+import org.apache.commons.numbers.fraction.BigFraction;
 import org.gnucash.base.basetypes.simple.GCshAcctID;
 
-import xyz.schnorxoborx.base.numbers.FixedPointNumber;
-
-public record AcctIDAmountPair(GCshAcctID accountID, FixedPointNumber amount) {
+public record AcctIDAmountBFPair(GCshAcctID accountID, BigFraction amount) {
 
 	private final static double UNSET_VALUE = -999999;
 	private final static int    SCALE       = 2;
@@ -29,7 +28,7 @@ public record AcctIDAmountPair(GCshAcctID accountID, FixedPointNumber amount) {
 	
 	@Override
 	public String toString() {
-		return "AcctIDAmountPair [accountID=" + accountID + 
+		return "AcctIDAmountBFPair [accountID=" + accountID + 
 								  ", amount=" + String.format("%." + SCALE + "f", amount.doubleValue() ) + "]";
 	}
 
