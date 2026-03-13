@@ -19,7 +19,32 @@ This might seem overly complicated, but in fact, it was necessary, because the a
 ## Major Changes 
 ### V. 1.7.1 &rarr; 1.8
 
-* Package "`basetypes.complex`": Introduced sub-type: Moved part of the entries in `GCshCmdtyCurrID.Type` to `GCshCmdtyID.SubType `.
+* Package "`basetypes.complex`": Changed naming conventions:
+    * Now finally fully honor the GnuCash naming convention: "commodity" is
+      an umbrella term for currencies, (pseudo-)securities, (real) 
+      commodities (like precious/industry metals, wheat, etc.) -- e.t. 
+      that has a value and can be bought/sold. Introduced the term
+      "security" (until now, we used the term "commodity" for this in 
+      the lib).
+
+      In addition to that, have the whole shebang and e.t. that depends
+      on it more symmetric to sister project.
+    
+      In short:
+       * "Cmdty" &rarr; "Sec"
+       * "CmdtyCurr" &rarr; "Cmdty"
+    
+      More detailed:
+       * `GCshCmdtyCurrID` &rarr; `GCshCmdtyID` (renamed)
+       * `GCshCmdtyID` (old) &rarr; `GCshSecID` (renamed)
+
+       **`GCshCmdtyID` has totally changed its meaning/semantics!**
+
+       **And it leads to a *lot* of changes in the other modules.**
+
+    * Introduced sub-type for securities: Moved part of the entries in 
+      `GCshCmdtyID.Type` to `GCshSecID.SubType `.
+
 * Some additional minor improvements (more variants for constructors).
 
 ### V. 1.7 &rarr; 1.7.1
