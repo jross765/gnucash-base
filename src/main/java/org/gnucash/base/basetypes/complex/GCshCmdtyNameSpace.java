@@ -59,7 +59,7 @@ public class GCshCmdtyNameSpace {
 	NYSE_ARCA, 	// NYSE Arca 
 	NYSE_AMERICAN,	// NYSE American (formerly NYSE MKT and 
 			// American Stock Exchange (AMEX)
-	
+
 	// Central America
 	BNV, 	// Bolsa Nacional de Valores 
 	BVES, 	// Bolsa de Valores de El Salvador 
@@ -68,7 +68,7 @@ public class GCshCmdtyNameSpace {
 	BHV, 	// Bolsa Honduras de Valores 
 	BVDN, 	// Bolsa de Valores de Nicaragua 
 	BVP,	// Bolsa de Valores de Panamá 
-	
+
 	// South America
 	BCBA, 	// Buenos Aires Stock Exchange 
 	MAE, 	// Mercado Abierto Electrónico 
@@ -95,30 +95,30 @@ public class GCshCmdtyNameSpace {
 	BEVSA, 	// Bolsa Electronica de Valores de Uruguay
 	// Conflict with Colombia Stock Exchange (MILA)
 	// BVC,	// Bolsa de Valores de Caracas 
-	
+
 	// Caribbean
 	// ...
 
-	
+
 	// ------------------------
 	// Europe
 	// Cf. https://en.wikipedia.org/wiki/List_of_European_stock_exchanges
 	// ------------------------
-	
+
 	EURONEXT, // Euronext; 
-		  // Caution: Do not confuse with EUREX, which trades derivatives only
+	          // Caution: Do not confuse with EUREX, which trades derivatives only
 	LSEG,	// London Stock Exchange
 	XETRA,  // XETRA / Frankfurt Stock Exchange / Deutsche Boerse
 	SIX,	// Swiss Exchange
 	NASDAQ_NORDIC, // Nasdaq Nordic
-	
+
 	// ...and a couple of minor ones.
-	
+
 	// ------------------------
 	// Asia
 	// Cf. https://en.wikipedia.org/wiki/List_of_Asian_stock_exchanges
 	// ------------------------
-	
+
 	// Central Asia
 	KASE, 	// Kazakhstan Stock Exchange 
 	AIX, 	// Astana International Exchange 
@@ -127,7 +127,7 @@ public class GCshCmdtyNameSpace {
 	CASE, 	// Central Asian Stock Exchange 
 	SRCMET, // State Commodity and Raw Material Exchange of Turkmenistan 
 	UZSE, 	// Tashkent Stock Exchange 
-	
+
 	// Eastern Asia
 	BSE, 	// Beijing Stock Exchange 
 	DCE, 	// Dalian Commodity Exchange 
@@ -191,7 +191,7 @@ public class GCshCmdtyNameSpace {
 	VNX, 	// Vietnam Stock Exchange 
 	HSX, 	// Ho Chi Minh Stock Exchange 
 	HNX,	// Hanoi Stock Exchange 
-	
+
 	// Southern Asia
 	AFX, 	// Afghanistan Stock Exchange
 	// Conflict with Canadian Securities Exchange
@@ -231,12 +231,12 @@ public class GCshCmdtyNameSpace {
 	DFM, 	// Dubai Financial Market 
 	NASDAQ_DUBAI, // Dubai 	NASDAQ Dubai 
 	DGCX, 	// Dubai Gold & Commodities Exchange 
-	
+
 	// ------------------------
 	// Oceania
 	// Cf. https://en.wikipedia.org/wiki/List_of_stock_exchanges_in_Oceania
 	// ------------------------
-	
+
 	APTEX, 	// Sydney 
 	APXL, 	// Melbourne 
 	ASX, 	// Sydney 
@@ -251,7 +251,7 @@ public class GCshCmdtyNameSpace {
 	// ::TODO: some more perhaps...
 	
 	// ------------------------
-	
+
 	UNSET
     }
 
@@ -260,7 +260,7 @@ public class GCshCmdtyNameSpace {
     //  - https://en.wikipedia.org/wiki/List_of_stock_exchanges
     //  - https://en.wikipedia.org/wiki/Market_Identifier_Code 
     public enum MIC {
-	
+
 	// 1) Major Stock Exchanges
 	XNYS, // New York Stock Exchange 
 	XNAS, // Nasdaq
@@ -286,9 +286,9 @@ public class GCshCmdtyNameSpace {
 	XTAI, // Taiwan Stock Exchange 
 	XASX, // Australian Securities Exchange 
 	XJSE, // Johannesburg Stock Exchange 
-	
+
 	// ... and many others
-	
+
 	UNSET
     }
     
@@ -296,9 +296,9 @@ public class GCshCmdtyNameSpace {
     public enum SecIdType {
 	ISIN,  // Truly global 
 	       // Cf. https://en.wikipedia.org/wiki/International_Securities_Identification_Number 
-	
+
 	// Region/country-specific:
-	
+
 	CUSIP, // Covers the USA and Canada -- can easily be converted to an ISIN.
 	       // (In practice, it's sometimes a little difficult to get a 
 	       // security's CUSIP because in these two countries, many individuals 
@@ -309,21 +309,20 @@ public class GCshCmdtyNameSpace {
 	
 	SEDOL, // Covers the UK and Ireland -- can easily be converted to an ISIN.
 	       // Cf. https://en.wikipedia.org/wiki/SEDOL
-	
+
+	WKN,   // Covers Germany -- can easily be converted to an ISIN. 
+	       // The Germans to this day stubbornly continue to use the 
+	       // WKN instead of the ISIN (even for non-German securities, 
+	       // where there is no link between the WKN and the ISIN).
+	       // Cf. https://en.wikipedia.org/wiki/Wertpapierkennnummer
+
+	VALOR, // Covers Switzerland -- can easily be converted to an ISIN.
+	       // Cf. https://en.wikipedia.org/wiki/Valoren_number
+
 //	SICOVAM, // Used to cover France -- could easily be converted to an ISIN.
 	       // Is obsolete / does not exist any more (not even "internally",
 	       // as far as I know), as it has been replaced by the ISIN in 2003.
 	       // Cf. https://en.wikipedia.org/wiki/Sicovam_code
-
-	WKN,   // Covers Germany and Austria -- can easily be converted 
-	       // to an ISIN. The Germans/Austrians to this day stubbornly
-	       // continue to use the WKN instead of the ISIN (even for
-	       // non-German/Austrian securities, where there is no link
-	       // between the WKN and the ISIN).
-	       // Cf. https://en.wikipedia.org/wiki/Wertpapierkennnummer
-	
-	VALOR, // Covers Switzerland -- can easily be converted to an ISIN.
-           // Cf. https://en.wikipedia.org/wiki/Valoren_number
 
 	// Others? Not that I knew...
 	// Note that market-specific code systems, such as:
