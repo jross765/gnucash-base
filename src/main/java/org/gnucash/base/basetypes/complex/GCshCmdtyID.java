@@ -187,6 +187,13 @@ public class GCshCmdtyID {
     
     // ---------------------------------------------------------------
     
+    public void set(GCshCmdtyID cmdtyID) {
+    	setNameSpace(cmdtyID.getNameSpace());
+    	setCode(cmdtyID.getCode());
+    }
+    
+    // ---------------------------------------------------------------
+    
     public static GCshCmdtyID parse(String str) {
 	if ( str == null )
 	    throw new IllegalArgumentException("Argument string is null");
