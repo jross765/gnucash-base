@@ -77,8 +77,8 @@ public class GCshSecID_MIC extends GCshSecID {
 		if ( micStr == null )
 			throw new IllegalArgumentException("MIC string is null");
 
-		if ( micStr.trim().equals("") )
-			throw new IllegalArgumentException("MIC string is empty");
+		if ( micStr.isBlank() )
+			throw new IllegalArgumentException("MIC string is blank");
 
 		setMIC(GCshCmdtyNameSpace.MIC.valueOf(micStr.trim()));
 	}
@@ -89,8 +89,8 @@ public class GCshSecID_MIC extends GCshSecID {
 		if ( str == null )
 			throw new IllegalArgumentException("Argument string is null");
 
-		if ( str.equals("") )
-			throw new IllegalArgumentException("Argument string is empty");
+		if ( str.isBlank() )
+			throw new IllegalArgumentException("Argument string is blank");
 
 		GCshSecID_MIC result = new GCshSecID_MIC();
 

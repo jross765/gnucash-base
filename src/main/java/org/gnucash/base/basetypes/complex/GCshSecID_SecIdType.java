@@ -77,8 +77,8 @@ public class GCshSecID_SecIdType extends GCshSecID {
 		if ( secIdTypeStr == null )
 			throw new IllegalArgumentException("Security ID type string is null");
 
-		if ( secIdTypeStr.trim().equals("") )
-			throw new IllegalArgumentException("Security ID type string is empty");
+		if ( secIdTypeStr.isBlank() )
+			throw new IllegalArgumentException("Security ID type string is blank");
 
 		setSecIdType(GCshCmdtyNameSpace.SecIdType.valueOf(secIdTypeStr.trim()));
 	}
@@ -97,8 +97,8 @@ public class GCshSecID_SecIdType extends GCshSecID {
 		if ( str == null )
 			throw new IllegalArgumentException("Argument string is null");
 
-		if ( str.equals("") )
-			throw new IllegalArgumentException("Argument string is empty");
+		if ( str.isBlank() )
+			throw new IllegalArgumentException("Argument string is blank");
 
 		GCshSecID_SecIdType result = new GCshSecID_SecIdType();
 

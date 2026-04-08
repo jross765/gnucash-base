@@ -55,14 +55,14 @@ public class GCshCmdtyID {
     	if ( nameSpaceFree == null )
     		throw new IllegalArgumentException("Name space is null");
 
-    	if ( nameSpaceFree.trim().equals("") )
-    		throw new IllegalArgumentException("Name space is empty");
+    	if ( nameSpaceFree.isBlank() )
+    		throw new IllegalArgumentException("Name space is blank");
 
     	if ( code == null )
     		throw new IllegalArgumentException("Security code is null");
 
-    	if ( code.trim().equals("") )
-    		throw new IllegalArgumentException("Security code is empty");
+    	if ( code.isBlank() )
+    		throw new IllegalArgumentException("Security code is blank");
 
     	if ( nameSpaceFree.trim().equals(GCshCmdtyNameSpace.CURRENCY) ) {
     		this.type = Type.CURRENCY;
@@ -79,8 +79,8 @@ public class GCshCmdtyID {
 //	if ( nameSpaceFree == null )
 //	    throw new IllegalArgumentException("Name space is null");
 //
-//	if ( nameSpaceFree.trim().equals("") )
-//	    throw new IllegalArgumentException("Name space is empty");
+//	if ( nameSpaceFree.isBlank() )
+//	    throw new IllegalArgumentException("Name space is blank");
 //	
 //	if ( nameSpaceFree.trim().equals(CmdtyCurrNameSpace.CURRENCY) ) {
 //	    this.type = Type.CURRENCY;
@@ -123,8 +123,8 @@ public class GCshCmdtyID {
     	if ( curr == null )
     		throw new IllegalArgumentException("argument <curr> is null");
 
-    	if ( curr.getSymbol().equals("") )
-    		throw new IllegalArgumentException("argument <curr> is empty");
+    	if ( curr.getSymbol().isBlank() )
+    		throw new IllegalArgumentException("argument <curr> is blank");
 
     	setNameSpace(GCshCmdtyNameSpace.CURRENCY);
     	setCode(curr.getCurrencyCode());
@@ -136,7 +136,7 @@ public class GCshCmdtyID {
     	if ( this.type == Type.UNSET )
     		return false;
     	
-    	if ( this.code.trim().equals("") )
+    	if ( this.code.isBlank() )
     		return false;
     	
     	return true;
@@ -165,8 +165,8 @@ public class GCshCmdtyID {
 	if ( nameSpace == null )
 	    throw new IllegalArgumentException("Name space is null");
 
-	if ( nameSpace.trim().equals("") )
-	    throw new IllegalArgumentException("Name space is empty");
+	if ( nameSpace.isBlank() )
+	    throw new IllegalArgumentException("Name space is blank");
 
         this.nameSpace = nameSpace.trim();
     }
@@ -179,8 +179,8 @@ public class GCshCmdtyID {
 	if ( secCode == null )
 	    throw new IllegalArgumentException("Security code is null");
 
-	if ( secCode.trim().equals("") )
-	    throw new IllegalArgumentException("Security code is empty");
+	if ( secCode.isBlank() )
+	    throw new IllegalArgumentException("Security code is blank");
 
         this.code = secCode.trim();
     }
@@ -198,8 +198,8 @@ public class GCshCmdtyID {
 	if ( str == null )
 	    throw new IllegalArgumentException("Argument string is null");
 
-	if ( str.equals("") )
-	    throw new IllegalArgumentException("Argument string is empty");
+	if ( str.isBlank() )
+	    throw new IllegalArgumentException("Argument string is blank");
 
 	GCshCmdtyID result = new GCshCmdtyID();
 	

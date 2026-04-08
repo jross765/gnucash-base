@@ -94,8 +94,8 @@ public class GCshCurrID extends GCshCmdtyID {
 		if ( iso4217CurrCode == null )
 			throw new IllegalArgumentException("argument <iso4217CurrCode> is null");
 
-		if ( iso4217CurrCode.trim().equals("") )
-			throw new IllegalArgumentException("argument <iso4217CurrCode> is empty");
+		if ( iso4217CurrCode.isBlank() )
+			throw new IllegalArgumentException("argument <iso4217CurrCode> is blank");
 
 		setCurrency(Currency.getInstance(iso4217CurrCode));
 	}
@@ -106,8 +106,8 @@ public class GCshCurrID extends GCshCmdtyID {
 		if ( str == null )
 			throw new IllegalArgumentException("Argument string is null");
 
-		if ( str.equals("") )
-			throw new IllegalArgumentException("Argument string is empty");
+		if ( str.isBlank() )
+			throw new IllegalArgumentException("Argument string is blank");
 
 		GCshCurrID result = new GCshCurrID();
 

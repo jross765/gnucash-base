@@ -84,8 +84,8 @@ public class GCshSecID extends GCshCmdtyID {
 		if ( str == null )
 			throw new IllegalArgumentException("Argument string is null");
 
-		if ( str.equals("") )
-			throw new IllegalArgumentException("Argument string is empty");
+		if ( str.isBlank() )
+			throw new IllegalArgumentException("Argument string is blank");
 
 		GCshSecID result = new GCshSecID();
 

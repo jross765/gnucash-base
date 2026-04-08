@@ -76,8 +76,8 @@ public class GCshSecID_Exchange extends GCshSecID {
 		if ( exchangeStr == null )
 			throw new IllegalArgumentException("Exchange string is null");
 
-		if ( exchangeStr.trim().equals("") )
-			throw new IllegalArgumentException("Exchange string is empty");
+		if ( exchangeStr.isBlank() )
+			throw new IllegalArgumentException("Exchange string is blank");
 
 		setExchange(GCshCmdtyNameSpace.Exchange.valueOf(exchangeStr.trim()));
 	}
@@ -88,8 +88,8 @@ public class GCshSecID_Exchange extends GCshSecID {
 		if ( str == null )
 			throw new IllegalArgumentException("Argument string is null");
 
-		if ( str.equals("") )
-			throw new IllegalArgumentException("Argument string is empty");
+		if ( str.isBlank() )
+			throw new IllegalArgumentException("Argument string is blank");
 
 		GCshSecID_Exchange result = new GCshSecID_Exchange();
 
