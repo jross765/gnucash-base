@@ -28,7 +28,7 @@ public record AcctIDAmountBFPair(GCshAcctID accountID, BigFraction amount) {
 	
 	@Override
 	public String toString() {
-		return "AcctIDAmountBFPair [accountID=" + accountID + 
+		return "AcctIDAmountBFPair [account-id=" + accountID + 
 								  ", amount=" + String.format("%." + SCALE + "f", amount.doubleValue() ) + "]";
 	}
 
