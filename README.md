@@ -16,71 +16,9 @@ This might seem overly complicated, but in fact, it was necessary, because the a
 
 * This repository contains no history before V. 1.7 (cf. notes in parent repo).
 
-## Major Changes 
-### V. 1.7.1 &rarr; 1.8
+## Major Changes
 
-* Package "`basetypes.complex`": Changed naming conventions:
-    * Now finally fully honor the GnuCash naming convention: "commodity" is
-      an umbrella term for currencies, (pseudo-)securities, (real) 
-      commodities (like precious/industry metals, wheat, etc.) -- e.t. 
-      that has a value and can be bought/sold. Introduced the term
-      "security" (until now, we used the term "commodity" for this in 
-      the lib).
-
-      In addition to that, have the whole shebang and e.t. that depends
-      on it more symmetric to sister project.
-    
-      In short:
-       * "Cmdty" &rarr; "Sec"
-       * "CmdtyCurr" &rarr; "Cmdty"
-    
-      More detailed:
-       * `GCshCmdtyCurrID` &rarr; `GCshCmdtyID` (renamed)
-       * `GCshCmdtyID` (old) &rarr; `GCshSecID` (renamed)
-
-       **`GCshCmdtyID` has totally changed its meaning/semantics!**
-
-       **And it leads to a *lot* of changes in the other modules.**
-
-    * Introduced sub-type for securities: Moved part of the entries in 
-      `GCshCmdtyID.Type` to `GCshSecID.SubType `.
-
-* Some additional minor improvements (more variants for constructors).
-
-### V. 1.7 &rarr; 1.7.1
-Only technical changes, essentially (i.e. code) unchanged.
-
-### V. 1.6 &rarr; 1.7
-* Introduced new (dummy) ID types: `GCshAcctID`, `GCshTrxID`, etc., all derived from `GCshID`.
-
-  *Rationale:* Improve type safety and overall robustness, the really important part being to use those new types in the the interfaces of the other modules, e.g.: 
-
-  `getAccountByID(GCshID acctID)` &rarr; `getAccountByID(GCshAcctID acctID)`
-
-  [ As an aside: This now looks much like the according types and methods in the sister project, but in contrast to there, there is actually no internal difference between those types. ]
-
-  The author has been weighing over the pros and cons of this step for quite a while now (admittedly, it seems exaggerated at first glance) and finally came to the conclusion: Yes, it should be done -- not so much for the symmetry between the two sister projects (one can also over-emphasize that), but for the (pseudo-)type safety and thus in order to significantly reduce the probability of making certain kinds of mistakes (and also to reduce the time finding them), fully leveraging Java's static type safety -- both for the developer(s) of this lib and for its users (after all, that was the rationale behind the introduction of `GCshID` in the first place, the original author handling e.t. just with strings -- yes, it worked, but it's far too error-prone).
-
-### V. 1.5 &rarr; 1.6
-* `GCshID`: Added constructor with UUID (this comes naturally).
-
-### V. 1.4 &rarr; 1.5
-* `FixedPointNumber`: Ironed out some inconsistencies: Some methods would change the (value of the) object itself, some others would not and instead generate a new one. Now, every calc-operation changes the (value of the) object itself. 
-
-  **CAUTION: This means that, as opposed to many (all?) other `number`-based Java classes, `FixedPointNumber` is *not* immutable.** 
-  Having it that way is, de facto, less of a *design* decision and more of a tribute to the *history* of the projects `JGnuCashLib(NTools)` and `JKMyMoneyLibNTools`
-  (and there are other things to say about this class, but let's not digress...).
-
-  This admittedly leads to less-than-beautiful code in the other modules, because you now have to use the method `copy()` a lot of times, but we had to do so before the changes anyway here and there, and at least it's consistent now.
-
-* Better test coverage: Now, I feel much better about it.
-
-* Finally: Moved package `numbers` to `SchnorxoLib` (and thus merged it with the almost 100%-redundant code in the sister project's according package).
-
-### V. 1.3 &rarr; 1.4
-* Created, spun off from the API module.
-
-* Better test coverage
+Cf. document "[Major Changes](https://github.com/jross765/JGnuCashLibNTools/gnucash-base/major_changes.md)".
 
 ## Planned
 ./.
