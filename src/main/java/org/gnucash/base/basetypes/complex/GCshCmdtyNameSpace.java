@@ -336,6 +336,8 @@ public class GCshCmdtyNameSpace {
 	// that Tokyo-codes effectively cover a whole country, the TSE being the
 	// only internationally relevant exchange in Japan...)
 	
+	CRYPTO, // Crypto-currency (as pseudo-security)
+	
 	UNSET
     }
     
